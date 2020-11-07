@@ -197,3 +197,4 @@ class Arrag_of_gummies(models.Model):
 
     # def __str__(self):
     #     return
+#lalalalalal
