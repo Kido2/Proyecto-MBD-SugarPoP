@@ -90,7 +90,7 @@ class Fact(models.Model):
 
 
 class Domc(models.Model):
-    documento = models.SmallIntegerField(primary_key=True)
+    document = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     id_fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
     direction = models.CharField(max_length=50)
