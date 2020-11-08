@@ -199,7 +199,7 @@ class Box_of_chocolates(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a chocolate box of the class %s"(self.id_product, self.category)
+        return "The product %s is a chocolate box of the class %s"(self.id_product, self.class_)
 
 
 class Box_of_gummies(models.Model):
@@ -216,7 +216,7 @@ class Box_of_gummies(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a gummy box of the class %s" %(self.id_product, self.category)
+        return "The product %s is a gummy box of the class %s" %(self.id_product, self.class_)
 
 
 class Arrag_of_gummies(models.Model):
@@ -231,8 +231,8 @@ class Arrag_of_gummies(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-    def __str__(self):
-        return "%s is an arragement of gummies" %(self.id_product)
+     def __str__(self):
+         return "%s is an arragement of gummies" %(self.id_product)
 
 class Arrag_of_chocls(models.Model):
     id_product = models.ForeignKey(
@@ -246,5 +246,7 @@ class Arrag_of_chocls(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-    def __str__(self):
-        return "%s is an arragement of chocolates" %(self.id_product)
+     def __str__(self):
+         return "%s is an arragement of chocolates" %(self.id_product)
+
+
