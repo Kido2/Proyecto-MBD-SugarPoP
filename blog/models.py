@@ -28,11 +28,11 @@ class User_sugar(models.Model):
     password = models.CharField(max_length=60)
 
     def __str__(self):
-        return "%s is the identification of user %s" % (self.id_user, self.nickname)
+        return "{0}".format(self.id_user)
 
 
 class Admin(models.Model):
-    document = models.SmallIntegerField(primary_key=True)
+    document = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     email = models.CharField(max_length=30)
     id_user = models.OneToOneField(
@@ -41,24 +41,24 @@ class Admin(models.Model):
     )
 
     def __str__(self):
-        return "%s is the admin" % self.name
+        return "{0}".format(self.document)
 
 
 class Client(models.Model):
-    document = models.IntegerField(primary_key=True)
+    document = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
     direction = models.CharField(max_length=50)
     email = models.CharField(max_length=30)
-    phone = models.SmallIntegerField(null=False)
+    phone = models.BigIntegerField(null=False)
     id_user = models.OneToOneField(
         User_sugar,
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return "%s has ID as %s" % (self.name, self.id_client)
+        return "{0}".format(self.document)
 
 
 class Method_of_payment(models.Model):
@@ -73,7 +73,7 @@ class Method_of_payment(models.Model):
         elif self.credit_card:
             return "%s has as payment method credit card" % (self.document)
         elif self.debit_card:
-            return "%s has as payment method debit card" % (self.document_client)
+            return "%s has as payment method debit card" % (self.document)
         else:
             return "%s doesnt have a payment method" % (self.document)
 
@@ -88,26 +88,25 @@ class Fact(models.Model):
     num_item = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "%s client has %s facture" % (self.id_client, self.id_fact)
+        return "{0}".format(self.id_fact)
 
 
 class Domc(models.Model):
-    document = models.SmallIntegerField(primary_key=True)
+    document = models.BigIntegerField(primary_key=True, max_length=50)
     name = models.CharField(max_length=50)
-    id_fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
     direction = models.CharField(max_length=50)
-    document = models.OneToOneField(
+    id_user = models.OneToOneField(
         User_sugar,
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return "%s domiciliary has ID as %s" % (self.name, self.id_domc)
+        return "{0}".format(self.document)
 
 
 class Product(models.Model):
     id_product = models.SmallIntegerField(primary_key=True)
-    product_name = models.SmallIntegerField(null=False)
+    product_name = models.CharField(null=False, max_length=50)
     unit_price = models.IntegerField(null=False)
     document_admin = models.ForeignKey(
         Admin,
@@ -115,7 +114,7 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return "%s has ID product as %s" % (self.product_name, self.id_product)
+        return "{0}".format(self.id_product)
 
 
 class Shopping_cart(models.Model):
@@ -125,7 +124,7 @@ class Shopping_cart(models.Model):
     date_of_validation = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return "The id cart's %s total price is %s " % (self.id_cart, self.total_price)
+        return "{0}".format(self.id_cart)
 
 
 class Product_cart(models.Model):
@@ -137,11 +136,11 @@ class Product_cart(models.Model):
 
 
 class Client_cart(models.Model):
-    document_client = models.OneToOneField(Client, on_delete=models.CASCADE)
+    document_client = models.OneToOneField(Client, on_delete=models.CASCADE, default=0)
     id_shopping_cart = models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "%s client has %s shopping cart" % (self.id_client, self.id_shopping_cart)
+        return "%s client has %s shopping cart" % (self.document_client, self.id_shopping_cart)
 
 
 class Client_cartfac(models.Model):
@@ -158,7 +157,7 @@ class Gummy(models.Model):
     type = models.CharField(max_length=50)
 
     def __str__(self):
-        return "%s is a gummy with a(n) %s flavor" % (self.id_product, self.flavor)
+        return "{0}".format(self.id_product)
 
 
 class Chocolate(models.Model):
@@ -167,7 +166,7 @@ class Chocolate(models.Model):
     type = models.CharField(max_length=50)
 
     def __str__(self):
-        return "%s is a chocolate with a(n) %s flavor" % (self.id_product, self.flavor)
+        return "{0}".format(self.id_product)
 
 
 class Flowers(models.Model):
@@ -177,7 +176,7 @@ class Flowers(models.Model):
     amount_of_flowers = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "%s is a bouquet of flowers that cost %s" % (self.id_product, self.price_of_bouquet)
+        return "{0}".format(self.id_product)
 
 
 class Box_of_chocolates(models.Model):
@@ -194,7 +193,7 @@ class Box_of_chocolates(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a chocolate box of the class %s"(self.id_product, self.category)
+        return "{0}".format(self.id_product)
 
 
 class Box_of_gummies(models.Model):
@@ -211,7 +210,7 @@ class Box_of_gummies(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a gummy box of the class %s" % (self.id_product, self.category)
+        return "{0}".format(self.id_product)
 
 
 class Arrag_of_gummies(models.Model):
@@ -227,7 +226,7 @@ class Arrag_of_gummies(models.Model):
     package = models.CharField(max_length=50)
 
     def __str__(self):
-        return "%s is an arragement of gummies" % (self.id_product)
+        return "{0}".format(self.id_product)
 
 
 class Arrag_of_chocls(models.Model):
@@ -243,4 +242,4 @@ class Arrag_of_chocls(models.Model):
     package = models.CharField(max_length=50)
 
     def __str__(self):
-        return "%s is an arragement of chocolates" % (self.id_product)
+        return "{0}".format(self.id_product)
