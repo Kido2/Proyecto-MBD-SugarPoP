@@ -34,7 +34,7 @@ class User_sugar(models.Model):
 class Admin(models.Model):
     id_admin = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
-    id = models.SmallIntegerField(null=False)
+    documento = models.SmallIntegerField(null=False)
     email = models.CharField(max_length=30)
     id_user = models.OneToOneField(
         User_sugar,
