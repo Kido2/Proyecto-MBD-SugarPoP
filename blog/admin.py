@@ -113,141 +113,142 @@ c1 = Box_of_chocolates(id_product_id=1, category='artesano', weight=234, expedit
                        expiration_date=datetime.date(2021, 7, 10), total_price=8300, number_of_units=10)
 c1.save()
 
-pc2 = Product(id_product=2, product_name='pasti_white_chocolate_box', unit_price=800, document_admin=1085987365)
+pc2 = Product(id_product=2, product_name='pasti_white_chocolate_box', unit_price=800, document_admin_id=1085987365)
 pc2.save()
-cp2 = Chocolate(id_product=2, flavor='leche', type='blancos', )
+cp2 = Chocolate(id_product_id=2, flavor='leche', type='blancos', )
 cp2.save()
-c2 = Box_of_chocolates(id_product=2, category='blanco', weight=218, expedition_date=datetime.date(2020, 9, 23),
+c2 = Box_of_chocolates(id_product_id=2, category='blanco', weight=218, expedition_date=datetime.date(2020, 9, 23),
                        expiration_date=datetime.date(2021, 9, 21), total_price=10400, number_of_units=13)
 c2.save()
 
-pc3 = Product(id_product=3, product_name='baileys__chocolate_box', unit_price=1400, document_admin=1085987365)
+pc3 = Product(id_product=3, product_name='baileys__chocolate_box', unit_price=1400, document_admin_id=1085987365)
 pc3.save()
-cp3 = Chocolate(id_product=3, flavor='baileys', type='rellenos')
+cp3 = Chocolate(id_product_id=3, flavor='baileys', type='rellenos')
 cp3.save()
-c3 = Box_of_chocolates(id_product=3, category='relleno', weight=357, expedition_date=datetime.date(2020, 4, 26),
+c3 = Box_of_chocolates(id_product_id=3, category='relleno', weight=357, expedition_date=datetime.date(2020, 4, 26),
                        expiration_date=datetime.date(2021, 2, 24), total_price=17.200, number_of_units=12)
 c3.save()
 
-pc4 = Product(id_product=4, product_name='mojitos_chocolate_box', unit_price=400, document_admin=1085987365)
+pc4 = Product(id_product=4, product_name='mojitos_chocolate_box', unit_price=400, document_admin_id=1085987365)
 pc4.save()
-cp4 = Chocolate(id_product=4, flavor='mojito', type='negros')
+cp4 = Chocolate(id_product_id=4, flavor='mojito', type='negros')
 cp4.save()
-c4 = Box_of_chocolates(id_product=4, category='negro', weight=278, expedition_date=datetime.date(2020, 10, 8),
+c4 = Box_of_chocolates(id_product_id=4, category='negro', weight=278, expedition_date=datetime.date(2020, 10, 8),
                        expiration_date=datetime.date(2020, 9, 11), total_price=6800, number_of_units=17)
 c4.save()
 
-pc5 = Product(id_product=5, product_name='anchoas_chocolate_arrangement', unit_price=700, document_admin=1085987365)
+pc5 = Product(id_product=5, product_name='anchoas_chocolate_arrangement', unit_price=700, document_admin_id=1085987365)
 pc5.save()
-cp5 = Chocolate(id_product=5, flavor='anchoa', type='artesanos')
+cp5 = Chocolate(id_product_id=5, flavor='anchoa', type='artesanos')
 cp5.save()
-c5 = Arrag_of_chocls(id_product=5, arrag_price=23500, theme='Amor y amistad',
+c5 = Arrag_of_chocls(id_product_id=5, arrag_price=23500, theme='Amor y amistad',
                      expedition_date=datetime.date(2020, 2, 19),
                      weight=1000, package='estuche')
 c5.save()
 
-pc6 = Product(id_product=6, product_name='citrus_chocolate_arrangement', unit_price=900, document_admin=1085987365)
+pc6 = Product(id_product=6, product_name='citrus_chocolate_arrangement', unit_price=900, document_admin_id=1085987365)
 pc6.save()
-cp6 = Chocolate(id_product=6, flavor='naranja', type='trufas')
+cp6 = Chocolate(id_product_id=6, flavor='naranja', type='trufas')
 cp6.save()
-c6 = Arrag_of_chocls(id_product=6, arrag_price=34800, theme='Dia de las madres',
+c6 = Arrag_of_chocls(id_product_id=6, arrag_price=34800, theme='Dia de las madres',
                      expedition_date=datetime.date(2020, 3, 25),
                      weight=1500, package='caja')
 c6.save()
 
-pc7 = Product(id_product=7, product_name='coco_chocolate_arrangement', unit_price=700, document_admin=1085987365)
+pc7 = Product(id_product=7, product_name='coco_chocolate_arrangement', unit_price=700, document_admin_id=1085987365)
 pc7.save()
-cp7 = Chocolate(id_product=7, flavor='coco', type='rellenos')
+cp7 = Chocolate(id_product_id=7, flavor='coco', type='rellenos')
 cp7.save()
-c7 = Arrag_of_chocls(id_product=7, arrag_price=19900, theme='Amigo secreto', expedition_date=datetime.date(2020, 4, 29),
+c7 = Arrag_of_chocls(id_product_id=7, arrag_price=19900, theme='Amigo secreto', expedition_date=datetime.date(2020, 4, 29),
                      weight=1250, package='bolsa')
 c7.save()
 
 # GOMITAS
-pg1 = Product(id_product=8, product_name='Corazoncitos', unit_price=250, document_admin=1085987365)
+pg1 = Product(id_product=8, product_name='Corazoncitos', unit_price=250, document_admin_id=1085987365)
 pg1.save()
-gp1 = Gummy(id_product=8, flavor='Fresa', type='Corazones')
+gp1 = Gummy(id_product_id=8, flavor='Fresa', type='Corazones')
 gp1.save()
-g1 = Box_of_gummies(id_product=8, category='Corazon', weight=500, expedition_date=datetime.date(2020, 11, 7),
+g1 = Box_of_gummies(id_product_id=8, category='Corazon', weight=500, expedition_date=datetime.date(2020, 11, 7),
                     expiration_date=datetime.date(2021, 11, 7), total_price=7500, number_of_units=30)
 g1.save()
 
-pg2 = Product(id_product=9, product_name='Egipt', unit_price=360, document_admin=1085987365)
+pg2 = Product(id_product=9, product_name='Egipt', unit_price=360, document_admin_id=1085987365)
 pg2.save()
-gp2 = Gummy(id_product=9, flavor='Surtido', type='Piramides')
+gp2 = Gummy(id_product_id=9, flavor='Surtido', type='Piramides')
 gp2.save()
-g2 = Box_of_gummies(id_product=9, category='Piramide', weight=800, expedition_date=datetime.date(2020, 10, 7),
+g2 = Box_of_gummies(id_product_id=9, category='Piramide', weight=800, expedition_date=datetime.date(2020, 10, 7),
                     expiration_date=datetime.date(2021, 10, 7), total_price=8900, number_of_units=25)
 g2.save()
 
-pg3 = Product(id_product=10, product_name='Rellenitos', unit_price=340, document_admin=1085987365)
+pg3 = Product(id_product=10, product_name='Rellenitos', unit_price=340, document_admin_id=1085987365)
 pg3.save()
-gp3 = Gummy(id_product=10, flavor='Surtido', type='Relleno_chocolate')
+gp3 = Gummy(id_product_id=10, flavor='Surtido', type='Relleno_chocolate')
 gp3.save()
-g3 = Box_of_gummies(id_product=10, category='Relleno_chc', weight=1000, expedition_date=datetime.date(2020, 8, 10),
+g3 = Box_of_gummies(id_product_id=10, category='Relleno_chc', weight=1000, expedition_date=datetime.date(2020, 8, 10),
                     expiration_date=datetime.date(2021, 8, 10), total_price=10000, number_of_units=30)
 g3.save()
 
-pg4 = Product(id_product=11, product_name='Selva', unit_price=1000, document_admin=1085987365)
+pg4 = Product(id_product=11, product_name='Selva', unit_price=1000, document_admin_id=1085987365)
 pg4.save()
-gp4 = Gummy(id_product=11, flavor='Limon', type='Serpientes')
+gp4 = Gummy(id_product_id=11, flavor='Limon', type='Serpientes')
 gp4.save()
-g4 = Box_of_gummies(id_product=11, category='Serpiente', weight=1000, expedition_date=datetime.date(2020, 11, 7),
+g4 = Box_of_gummies(id_product_id=11, category='Serpiente', weight=1000, expedition_date=datetime.date(2020, 11, 7),
                     expiration_date=datetime.date(2021, 11, 7), total_price=15000, number_of_units=15)
 g4.save()
 
-pg5 = Product(id_product=12, product_name='Sandicin', unit_price=310, document_admin=1085987365)
+pg5 = Product(id_product=12, product_name='Sandicin', unit_price=310, document_admin_id=1085987365)
 pg5.save()
-gp5 = Gummy(id_product=12, flavor='Sandia', type='Cintas')
+gp5 = Gummy(id_product_id=12, flavor='Sandia', type='Cintas')
 gp5.save()
-g5 = Box_of_gummies(id_product=12, category='Cintas', weight=700, expedition_date=datetime.date(2020, 10, 10),
+g5 = Box_of_gummies(id_product_id=12, category='Cintas', weight=700, expedition_date=datetime.date(2020, 10, 10),
                     expiration_date=datetime.date(2021, 10, 10), total_price=37000, number_of_units=120)
 g5.save()
 
-pg6 = Product(id_product=13, product_name='Ossy', unit_price=2600, document_admin=1085987365)
+pg6 = Product(id_product=13, product_name='Ossy', unit_price=2600, document_admin_id=1085987365)
 pg6.save()
-gp6 = Gummy(id_product=13, flavor='Piña', type='Ositos')
+gp6 = Gummy(id_product_id=13, flavor='Piña', type='Ositos')
 gp6.save()
-g6 = Arrag_of_gummies(id_product=13, arrag_price=35000, theme='Verano', weight=1000, package='Canasta')
+g6 = Arrag_of_gummies(id_product_id=13, arrag_price=35000, theme='Verano', weight=1000, package='Canasta')
 g6.save()
 
-pg7 = Product(id_product=14, product_name='Saltarin', unit_price=3000, document_admin=1085987365)
+pg7 = Product(id_product=14, product_name='Saltarin', unit_price=3000, document_admin_id=1085987365)
 pg7.save()
-gp7 = Gummy(id_producto=14, flavor='Mora', type='Rana')
+gp7 = Gummy(id_product_id=14, flavor='Mora', type='Rana')
 gp7.save()
-g7 = Arrag_of_gummies(id_producto=14, arrag_price=40000, theme='Halloween', weight=4000, package='Bolsa')
+g7 = Arrag_of_gummies(id_product_id=14, arrag_price=40000, theme='Halloween', weight=4000, package='Bolsa')
 g7.save()
 
-pg8 = Product(id_product=15, product_name='Coquito', unit_price=1700, document_admin=1085987365)
+pg8 = Product(id_product=15, product_name='Coquito', unit_price=1700, document_admin_id=1085987365)
 pg8.save()
-gp8 = Gummy(id_product=15, flavor='Coco', type='Ositos')
+gp8 = Gummy(id_product_id=15, flavor='Coco', type='Ositos')
 gp8.save()
-g8 = Arrag_of_gummies(id_product=15, flavor='Coco', type='Ositos', arrag_price=37500, theme='Navidad', weight=4000,
+g8 = Arrag_of_gummies(id_product_id=15, flavor='Coco', type='Ositos', arrag_price=37500, theme='Navidad', weight=4000,
                       package='Canasta')
 g8.save()
 
 # FLORES
-pf1 = Product(id_product=16, product_name='ramo_rosas', unit_price=2000, document_admin=1085987365)
+pf1 = Product(id_product=16, product_name='ramo_rosas', unit_price=2000, document_admin_id=1085987365)
 pf1.save()
-f1 = Flowers(id_product=16, weight=6000, price_of_bouquet=26000, amount_of_flowers=12)
+f1 = Flowers(id_product_id=16, weight=6000, price_of_bouquet=26000, amount_of_flowers=12)
 f1.save()
 
-pf2 = Product(id_product=17, product_name='ramo_girasoles', unit_price=8000, document_admin=1085987365)
+pf2 = Product(id_product=17, product_name='ramo_girasoles', unit_price=8000, document_admin_id=1085987365)
 pf2.save()
-f2 = Flowers(id_product=17, weight=9000, price_of_bouquet=50000, amount_of_flowers=6)
+f2 = Flowers(id_product_id=17, weight=9000, price_of_bouquet=50000, amount_of_flowers=6)
 f2.save()
 
-pf3 = Product(id_product=18, product_name='ramo_mix', unit_price=10000, document_admin=1085987365)
+pf3 = Product(id_product=18, product_name='ramo_mix', unit_price=10000, document_admin_id=1085987365)
 pf3.save()
-f3 = Flowers(id_product=18, weight=6000, price_of_bouquet=60000, amount_of_flowers=17)
+f3 = Flowers(id_product_id=18, weight=6000, price_of_bouquet=60000, amount_of_flowers=17)
 f3.save()
 
-pf4 = Product(id_product=19, product_name='caja_rosas', unit_price=2000, document_admin=1085987365)
+pf4 = Product(id_product=19, product_name='caja_rosas', unit_price=2000, document_admin_id=1085987365)
 pf4.save()
-f4 = Flowers(id_product=19, weight=12000, price_of_bouquet=75000, amount_of_flowers=24)
+f4 = Flowers(id_product_id=19, weight=12000, price_of_bouquet=75000, amount_of_flowers=24)
 f4.save()
 
-pf5 = Product(id_product=20, product_name='caja_mix', unit_price=10000, document_admin=1085987365)
+pf5 = Product(id_product=20, product_name='caja_mix', unit_price=10000, document_admin_id=1085987365)
 pf5.save()
-f5 = Flowers(id_product=20, weight=10000, price_of_bouquet=67000, amount_of_flowers=24)
+f5 = Flowers(id_product_id=20, weight=10000, price_of_bouquet=67000, amount_of_flowers=24)
 f5.save()
+
