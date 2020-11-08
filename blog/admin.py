@@ -1,5 +1,6 @@
+import datetime
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import Admin, User_sugar, Product, Domc, Client, Method_of_payment, Fact, Shopping_cart, Product_cart, \
     Client_cart, Client_cartfac, Gummy, Chocolate, Flowers, Box_of_chocolates, Box_of_gummies, Arrag_of_gummies, \
     Arrag_of_chocls
@@ -25,6 +26,10 @@ u13 = User_sugar(id_user=13, nickname='sofia03456@gmail.com', password='user_2we
 u14 = User_sugar(id_user=14, nickname='carlos901233@gmail.com', password='user_32425^')
 u15 = User_sugar(id_user=15, nickname='juan4325@gmail.com', password='user_029034jf^')
 u16 = User_sugar(id_user=16, nickname='marta21086@gmail.com', password='user_ew0r95432^')
+
+user1 = User.objects.create_superuser('admin@sugarpop.com', 'admin@sugarpop.com', 'admin_el_mejor^')
+user2 = User.objects.create_user('andres0678@gmail.com', 'andres0678@gmail.com', 'user_21345^')
+user1.save()
 
 u1.save()
 u2.save()
@@ -102,7 +107,6 @@ d2.save()
 d3.save()
 d4.save()
 d5.save()
-
 
 #CHOCOLATES
 pc1 = Product(id_product=1, product_name='jalapy_chocolate_box', unit_price=800, document_admin_id=1085987365)
@@ -222,8 +226,7 @@ pg8 = Product(id_product=15, product_name='Coquito', unit_price=1700, document_a
 pg8.save()
 gp8 = Gummy(id_product_id=15, flavor='Coco', type='Ositos')
 gp8.save()
-g8 = Arrag_of_gummies(id_product_id=15, flavor='Coco', type='Ositos', arrag_price=37500, theme='Navidad', weight=4000,
-                      package='Canasta')
+g8 = Arrag_of_gummies(id_product_id=15, arrag_price=37500, theme='Navidad', weight=4000, package='Canasta')
 g8.save()
 
 # FLORES
