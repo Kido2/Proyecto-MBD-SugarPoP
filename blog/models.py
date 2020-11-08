@@ -62,27 +62,27 @@ class Client(models.Model):
 
 
 class Method_of_payment(models.Model):
-    document= models.ForeignKey(Client, on_delete=models.CASCADE)
+    document = models.ForeignKey(Client, on_delete=models.CASCADE)
     efective = models.BooleanField(null=False)
     credit_card = models.BooleanField(null=False)
     debit_card = models.BooleanField(null=False)
 
     def __str__(self):
         if self.efective:
-            return "%s has as payment method efective"%(self.document)
+            return "%s has as payment method efective" % (self.document)
         elif self.credit_card:
-            return "%s has as payment method credit card"%(self.document)
+            return "%s has as payment method credit card" % (self.document)
         elif self.debit_card:
-            return "%s has as payment method debit card"%(self.document_client)
+            return "%s has as payment method debit card" % (self.document_client)
         else:
-            return "%s doesnt have a payment method"%(self.document)
+            return "%s doesnt have a payment method" % (self.document)
 
 
 class Fact(models.Model):
     id_fact = models.SmallIntegerField(primary_key=True)
     document_client = models.ForeignKey(
-    Client,
-    on_delete=models.CASCADE,
+        Client,
+        on_delete=models.CASCADE,
     )
     date_of_expedition = models.DateTimeField(default=timezone.now)
     num_item = models.SmallIntegerField(null=False)
@@ -119,37 +119,37 @@ class Product(models.Model):
 
 
 class Shopping_cart(models.Model):
-    id_cart=models.SmallIntegerField(primary_key=True)
-    quantity= models.SmallIntegerField(null=False)
-    total_price=models.IntegerField(null=False)
-    date_of_validation=models.DateTimeField(default=timezone.now)
+    id_cart = models.SmallIntegerField(primary_key=True)
+    quantity = models.SmallIntegerField(null=False)
+    total_price = models.IntegerField(null=False)
+    date_of_validation = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return "The id cart's %s total price is %s "%(self.id_cart,self.total_price)
+        return "The id cart's %s total price is %s " % (self.id_cart, self.total_price)
 
 
 class Product_cart(models.Model):
-    id_cart=models.ForeignKey( Shopping_cart,on_delete=models.CASCADE)
-    id_product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    id_cart = models.ForeignKey(Shopping_cart, on_delete=models.CASCADE)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "In the cart %s is the product %s"%(self.id_cart,self.id_product)
+        return "In the cart %s is the product %s" % (self.id_cart, self.id_product)
 
 
 class Client_cart(models.Model):
-    document_client=models.OneToOneField(Client, on_delete=models.CASCADE)
-    id_shopping_cart=models.OneToOneField(Shopping_car, on_delete=models.CASCADE)
+    document_client = models.OneToOneField(Client, on_delete=models.CASCADE)
+    id_shopping_cart = models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "%s client has %s shopping cart" %(self.id_client, self.id_shopping_cart)
+        return "%s client has %s shopping cart" % (self.id_client, self.id_shopping_cart)
 
 
 class Client_cartfac(models.Model):
-    id_fact=models.OneToOneField(Fact, on_delete=models.CASCADE)
-    id_cart=models.OneToOneField(Shopping_cart,on_delete=models.CASCADE)
+    id_fact = models.OneToOneField(Fact, on_delete=models.CASCADE)
+    id_cart = models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "The invoice %s belongs to the cart %s"%(self.id_fact,self.id_cart)
+        return "The invoice %s belongs to the cart %s" % (self.id_fact, self.id_cart)
 
 
 class Gummy(models.Model):
@@ -211,7 +211,7 @@ class Box_of_gummies(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a gummy box of the class %s" %(self.id_product, self.category)
+        return "The product %s is a gummy box of the class %s" % (self.id_product, self.category)
 
 
 class Arrag_of_gummies(models.Model):
@@ -226,8 +226,9 @@ class Arrag_of_gummies(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-     def __str__(self):
-         return "%s is an arragement of gummies" %(self.id_product)
+    def __str__(self):
+        return "%s is an arragement of gummies" % (self.id_product)
+
 
 class Arrag_of_chocls(models.Model):
     id_product = models.ForeignKey(
@@ -241,5 +242,5 @@ class Arrag_of_chocls(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-     def __str__(self):
-         return "%s is an arragement of chocolates" %(self.id_product)
+    def __str__(self):
+        return "%s is an arragement of chocolates" % (self.id_product)
