@@ -138,7 +138,7 @@ class Product_cart(models.Model):
 
 class Client_cart(models.Model):
     document_client=models.OneToOneField(Client, on_delete=models.CASCADE)
-    id_shopping_cart=models.OneToOneField(Shopping_car, on_delete=models.CASCADE)
+    id_shopping_cart=models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
 
     def __str__(self):
         return "%s client has %s shopping cart" %(self.id_client, self.id_shopping_cart)
@@ -194,7 +194,7 @@ class Box_of_chocolates(models.Model):
     number_of_units = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "The product %s is a chocolate box of the class %s"(self.id_product, self.category)
+        return "The product %s is a chocolate box of the class %s"%(self.id_product, self.category)
 
 
 class Box_of_gummies(models.Model):
@@ -226,8 +226,8 @@ class Arrag_of_gummies(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-     def __str__(self):
-         return "%s is an arragement of gummies" %(self.id_product)
+    def __str__(self):
+        return "%s is an arragement of gummies" %(self.id_product)
 
 class Arrag_of_chocls(models.Model):
     id_product = models.ForeignKey(
@@ -241,6 +241,5 @@ class Arrag_of_chocls(models.Model):
     weight = models.SmallIntegerField(null=False)
     package = models.CharField(max_length=50)
 
-     def __str__(self):
-         return "%s is an arragement of chocolates" %(self.id_product)
-
+    def __str__(self):
+        return "%s is an arragement of chocolates" %(self.id_product)
