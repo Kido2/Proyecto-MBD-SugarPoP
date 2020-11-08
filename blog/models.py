@@ -32,9 +32,8 @@ class User_sugar(models.Model):
 
 
 class Admin(models.Model):
-    id_admin = models.SmallIntegerField(primary_key=True)
+    document = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
-    document = models.SmallIntegerField(null=False)
     email = models.CharField(max_length=30)
     id_user = models.OneToOneField(
         User_sugar,
@@ -46,7 +45,7 @@ class Admin(models.Model):
 
 
 class Client(models.Model):
-    id_client = models.IntegerField(primary_key=True)
+    document = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=50)
     country = models.CharField(max_length=20)
     city = models.CharField(max_length=20)
@@ -70,22 +69,22 @@ class Method_of_payment(models.Model):
 
     def __str__(self):
         if self.efective:
-            return "%s has as payment method %s"(self.document_client, self.efective)
+            return "%s has as payment method efective" % self.document_client
         elif self.credit_card:
-            return "%s has as payment method %s"(self.document_client, self.credit_card)
+            return "%s has as payment method credit_card" % self.document_client
         elif self.debit_card:
-            return "%s has as payment method %s"(self.document_client, self.debit_card)
+            return "%s has as payment method debit_card" % self.document_client
         else:
-            return "%s doesnt have a payment method %s"(self.document_client)
+            return "%s doesnt have a payment method" % self.document_client
 
 
 class Fact(models.Model):
     id_fact = models.SmallIntegerField(primary_key=True)
-    id_client = models.ForeignKey(
+    document_client = models.ForeignKey(
     Client,
     on_delete=models.CASCADE,
     )
-    d_o_exp = models.DateTimeField(default=timezone.now)
+    date_of_exp = models.DateTimeField(default=timezone.now)
     num_item = models.SmallIntegerField(null=False)
 
     def __str__(self):
@@ -95,8 +94,8 @@ class Fact(models.Model):
 class Domc(models.Model):
     document = models.SmallIntegerField(primary_key=True)
     name = models.CharField(max_length=50)
-    #id_fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
-    id_fact=models.SmallIntegerField(noull=False)
+    id_fact = models.ForeignKey(Fact, on_delete=models.CASCADE)
+    # id_fact=models.SmallIntegerField(noull=False)
     direction = models.CharField(max_length=50)
     id_user = models.OneToOneField(
         User_sugar,
@@ -115,7 +114,6 @@ class Domc(models.Model):
 
 class Product(models.Model):
     id_product = models.SmallIntegerField(primary_key=True)
-    id_cart = models.SmallIntegerField(null=False)
     product_name = models.SmallIntegerField(null=False)
     unit_price = models.IntegerField(null=False)
     id_admin = models.ForeignKey(
@@ -131,7 +129,7 @@ class Shopping_cart(models.Model):
     id_cart=models.SmallIntegerField(primary_key=True)
     quantity= models.SmallIntegerField(null=False)
     total_price=models.IntegerField(null=False)
-    d_o_exp=models.DateTimeField(default=timezone.now)
+    date_of_val=models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return "The id cart's %s total price is %s "%(self.id_cart,self.total_price)
@@ -144,7 +142,7 @@ class Product_cart(models.Model):
         return "In the cart %s is the product %s"%(self.id_cart,self.id_product)
 
 class Client_cart(models.Model):
-    id_client=models.OneToOneField(Client, on_delete=models.CASCADE)
+    document_client=models.OneToOneField(Client, on_delete=models.CASCADE)
     id_shopping_cart=models.OneToOneField(Shopping_car, on_delete=models.CASCADE)
 
     def __str__(self):
