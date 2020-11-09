@@ -12,8 +12,6 @@ admin.site.register([User_sugar, Admin, Product, Domc, Client, Method_of_payment
 
 # Cambiar direccion de carpeta migrations
 if os.path.isdir('~/Universidad/Bases_de_datos/Proyecto-MBD-SugarPoP/blog/migrations'):
-    pass
-else:
     # Usuarios
     u1 = User_sugar(id_user=1, nickname='admin@sugarpop.com', password='admin_el_mejor^')
     u2 = User_sugar(id_user=2, nickname='andres0678@gmail.com', password='user_21345^')
@@ -31,7 +29,7 @@ else:
     u14 = User_sugar(id_user=14, nickname='carlos901233@gmail.com', password='user_32425^')
     u15 = User_sugar(id_user=15, nickname='juan4325@gmail.com', password='user_029034jf^')
     u16 = User_sugar(id_user=16, nickname='marta21086@gmail.com', password='user_ew0r95432^')
-    
+
     # Crear los usuarios
     [user.delete() for user in list(User.objects.all())]
     User.objects.create_superuser('admin@sugarpop.com', 'admin@sugarpop.com', 'admin_el_mejor^')
@@ -119,7 +117,7 @@ else:
     d4.save()
     d5.save()
 
-    #CHOCOLATES
+    # CHOCOLATES
     pc1 = Product(id_product=1, product_name='jalapy_chocolate_box', unit_price=800, document_admin_id=1085987365)
     pc1.save()
     cp1 = Chocolate(id_product_id=1, flavor='picante', type='artesanos')
@@ -152,7 +150,8 @@ else:
                            expiration_date=datetime.date(2020, 9, 11), total_price=6800, number_of_units=17)
     c4.save()
 
-    pc5 = Product(id_product=5, product_name='anchoas_chocolate_arrangement', unit_price=700, document_admin_id=1085987365)
+    pc5 = Product(id_product=5, product_name='anchoas_chocolate_arrangement', unit_price=700,
+                  document_admin_id=1085987365)
     pc5.save()
     cp5 = Chocolate(id_product_id=5, flavor='anchoa', type='artesanos')
     cp5.save()
@@ -161,7 +160,8 @@ else:
                          weight=1000, package='estuche')
     c5.save()
 
-    pc6 = Product(id_product=6, product_name='citrus_chocolate_arrangement', unit_price=900, document_admin_id=1085987365)
+    pc6 = Product(id_product=6, product_name='citrus_chocolate_arrangement', unit_price=900,
+                  document_admin_id=1085987365)
     pc6.save()
     cp6 = Chocolate(id_product_id=6, flavor='naranja', type='trufas')
     cp6.save()
@@ -174,7 +174,8 @@ else:
     pc7.save()
     cp7 = Chocolate(id_product_id=7, flavor='coco', type='rellenos')
     cp7.save()
-    c7 = Arrag_of_chocls(id_product_id=7, arrag_price=19900, theme='Amigo secreto', expedition_date=datetime.date(2020, 4, 29),
+    c7 = Arrag_of_chocls(id_product_id=7, arrag_price=19900, theme='Amigo secreto',
+                         expedition_date=datetime.date(2020, 4, 29),
                          weight=1250, package='bolsa')
     c7.save()
 
@@ -199,7 +200,8 @@ else:
     pg3.save()
     gp3 = Gummy(id_product_id=10, flavor='Surtido', type='Relleno_chocolate')
     gp3.save()
-    g3 = Box_of_gummies(id_product_id=10, category='Relleno_chc', weight=1000, expedition_date=datetime.date(2020, 8, 10),
+    g3 = Box_of_gummies(id_product_id=10, category='Relleno_chc', weight=1000,
+                        expedition_date=datetime.date(2020, 8, 10),
                         expiration_date=datetime.date(2021, 8, 10), total_price=10000, number_of_units=30)
     g3.save()
 
@@ -265,3 +267,5 @@ else:
     pf5.save()
     f5 = Flowers(id_product_id=20, weight=10000, price_of_bouquet=67000, amount_of_flowers=24)
     f5.save()
+else:
+    pass
