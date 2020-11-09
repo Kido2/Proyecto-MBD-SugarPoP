@@ -78,19 +78,6 @@ class Method_of_payment(models.Model):
             return "%s doesnt have a payment method" % (self.document)
 
 
-class Fact(models.Model):
-    id_fact = models.SmallIntegerField(primary_key=True)
-    document_client = models.ForeignKey(
-        Client,
-        on_delete=models.CASCADE,
-    )
-    date_of_expedition = models.DateTimeField(default=timezone.now)
-    num_item = models.SmallIntegerField(null=False)
-
-    def __str__(self):
-        return "{0}".format(self.id_fact)
-
-
 class Domc(models.Model):
     document = models.BigIntegerField(primary_key=True, max_length=50)
     name = models.CharField(max_length=50)
@@ -102,6 +89,20 @@ class Domc(models.Model):
 
     def __str__(self):
         return "{0}".format(self.document)
+
+
+class Fact(models.Model):
+    id_fact = models.SmallIntegerField(primary_key=True)
+    document_client = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+    )
+    date_of_expedition = models.DateTimeField(default=timezone.now)
+    num_item = models.SmallIntegerField(null=False)
+    document_domc = models.ForeignKey(Domc,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{0}".format(self.id_fact)
 
 
 class Product(models.Model):
