@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}
-Domiciliario
+Administrador
 {% endblock %}
 
 
 {% block content %}
-    <h3>Pagina de domiciliario</h3>
+    <h3>Pagina de administrador</h3>
     <span class="hello-msg">Hola, {{request.user}}</span>
     <span><a href="{% url 'logout' %}">Cerrar sesión</a></span>
 {% endblock %}
