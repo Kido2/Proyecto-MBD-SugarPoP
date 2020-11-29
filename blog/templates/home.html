@@ -5,5 +5,10 @@ Home
 
 
 {% block content %}
-<h3>Home Page</h3>
+    <h3>Home Page</h3>
+    <h4>Cliente</h4>
+    <h4>Domiciliario</h4>
+    <h4>Administrador</h4>
+    <span class="hello-msg">Hola, {{request.user}}</span>
+    <span><a href="{% url 'logout' %}">Cerrar sesión</a></span>
 {% endblock %}

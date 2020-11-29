@@ -1,246 +1,213 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-
-
-# Create your models here.
-# class Post(models.Model):
-#     STATUS_CHOICES = (('draft', 'Draft'), ('published', 'Published'),)
-#     title = models.CharField(max_length=250)
-#     slug = models.SlugField(max_length=250, unique_for_date='publish')
-#     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
-#     body = models.TextField()
-#     publish = models.DateTimeField(default=timezone.now)
-#     created = models.DateTimeField(auto_now_add=True)
-#     updated = models.DateTimeField(auto_now=True)
-#     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-#
-#     class Meta:
-#         ordering = ('-publish',)
-#
-#     def __str__(self):
-#         return self.title
-
-
-class User_sugar(models.Model):
-    id_user = models.SmallIntegerField(primary_key=True)
-    nickname = models.CharField(max_length=60)
-    password = models.CharField(max_length=60)
-
-    def __str__(self):
-        return "{0}".format(self.id_user)
+from django.contrib.auth.models import User, AbstractUser
 
 
 class Admin(models.Model):
-    document = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    email = models.CharField(max_length=30)
+    documento = models.BigIntegerField(primary_key=True)
     id_user = models.OneToOneField(
-        User_sugar,
+        User,
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return "{0}".format(self.document)
+        return "{0}".format(self.documento)
 
 
-class Client(models.Model):
-    document = models.BigIntegerField(primary_key=True)
-    name = models.CharField(max_length=50)
-    country = models.CharField(max_length=20)
-    city = models.CharField(max_length=20)
-    direction = models.CharField(max_length=50)
-    email = models.CharField(max_length=30)
-    phone = models.BigIntegerField(null=False)
+class Cliente(models.Model):
+    documento = models.BigIntegerField(primary_key=True)
+    pais = models.CharField(max_length=20)
+    ciudad = models.CharField(max_length=20)
+    direccion = models.CharField(max_length=50)
+    telefono = models.BigIntegerField(null=False)
     id_user = models.OneToOneField(
-        User_sugar,
+        User,
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return "{0}".format(self.document)
+        return "{0}".format(self.documento)
 
 
-class Method_of_payment(models.Model):
-    document = models.ForeignKey(Client, on_delete=models.CASCADE)
-    efective = models.BooleanField(null=False)
-    credit_card = models.BooleanField(null=False)
-    debit_card = models.BooleanField(null=False)
+class MetodoDePago(models.Model):
+    documento = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    efectivo = models.BooleanField(null=False)
+    credito = models.BooleanField(null=False)
+    debito = models.BooleanField(null=False)
 
     def __str__(self):
-        if self.efective:
-            return "%s has as payment method efective" % (self.document)
-        elif self.credit_card:
-            return "%s has as payment method credit card" % (self.document)
-        elif self.debit_card:
-            return "%s has as payment method debit card" % (self.document)
+        if self.efectivo:
+            return self.documento
+        elif self.credito:
+            return self.documento
+        elif self.debito:
+            return self.documento
         else:
-            return "%s doesnt have a payment method" % (self.document)
+            return self.documento
 
 
-class Domc(models.Model):
-    document = models.BigIntegerField(primary_key=True, max_length=50)
-    name = models.CharField(max_length=50)
-    direction = models.CharField(max_length=50)
+class Domciliario(models.Model):
+    documento = models.BigIntegerField(primary_key=True)
+    direccion = models.CharField(max_length=50)
     id_user = models.OneToOneField(
-        User_sugar,
+        User,
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return "{0}".format(self.document)
+        return "{0}".format(self.documento)
 
 
-class Fact(models.Model):
-    id_fact = models.SmallIntegerField(primary_key=True)
-    document_client = models.ForeignKey(
-        Client,
+class Factura(models.Model):
+    id_factura = models.SmallIntegerField(primary_key=True)
+    documento_cliente = models.ForeignKey(
+        Cliente,
         on_delete=models.CASCADE,
     )
-    date_of_expedition = models.DateTimeField(default=timezone.now)
-    num_item = models.SmallIntegerField(null=False)
-    document_domc = models.ForeignKey(Domc,on_delete=models.CASCADE)
+    expedicion = models.DateTimeField(default=timezone.now)
+    item = models.SmallIntegerField(null=False)
+    documento_domiciliario = models.ForeignKey(Domciliario, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0}".format(self.id_fact)
+        return "{0}".format(self.id_factura)
 
 
-class Product(models.Model):
-    id_product = models.SmallIntegerField(primary_key=True)
-    product_name = models.CharField(null=False, max_length=50)
-    unit_price = models.IntegerField(null=False)
-    document_admin = models.ForeignKey(
+class Producto(models.Model):
+    id_producto = models.SmallIntegerField(primary_key=True)
+    nombre = models.CharField(null=False, max_length=50)
+    precio = models.IntegerField(null=False)
+    documento_admin = models.ForeignKey(
         Admin,
         on_delete=models.CASCADE
     )
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Shopping_cart(models.Model):
-    id_cart = models.SmallIntegerField(primary_key=True)
-    quantity = models.SmallIntegerField(null=False)
-    total_price = models.IntegerField(null=False)
-    date_of_validation = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return "{0}".format(self.id_cart)
-
-
-class Product_cart(models.Model):
-    id_cart = models.ForeignKey(Shopping_cart, on_delete=models.CASCADE)
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+class CarritoCompra(models.Model):
+    id_carrito = models.SmallIntegerField(primary_key=True)
+    cantidad = models.SmallIntegerField(null=False)
+    precio_total = models.IntegerField(null=False)
+    validacion = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return "In the cart %s is the product %s" % (self.id_cart, self.id_product)
+        return "{0}".format(self.id_carrito)
 
 
-class Client_cart(models.Model):
-    document_client = models.OneToOneField(Client, on_delete=models.CASCADE, default=0)
-    id_shopping_cart = models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return "%s client has %s shopping cart" % (self.document_client, self.id_shopping_cart)
-
-
-class Client_cartfac(models.Model):
-    id_fact = models.OneToOneField(Fact, on_delete=models.CASCADE)
-    id_cart = models.OneToOneField(Shopping_cart, on_delete=models.CASCADE)
+class ProductoCarrito(models.Model):
+    id_carrito = models.ForeignKey(CarritoCompra, on_delete=models.CASCADE)
+    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "The invoice %s belongs to the cart %s" % (self.id_fact, self.id_cart)
+        return self.id_carrito, self.id_producto
 
 
-class Gummy(models.Model):
-    id_product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
-    flavor = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+class ClienteCarrito(models.Model):
+    documento_cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE, default=0)
+    id_carrito_compra = models.OneToOneField(CarritoCompra, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return self.documento_cliente, self.id_carrito_compra
+
+
+class ClienteCarritoFactura(models.Model):
+    id_factura = models.OneToOneField(Factura, on_delete=models.CASCADE)
+    id_carrito = models.OneToOneField(CarritoCompra, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.id_factura, self.id_carrito
+
+
+class Goma(models.Model):
+    id_producto = models.OneToOneField(Producto, on_delete=models.CASCADE, primary_key=True)
+    sabor = models.CharField(max_length=50)
+    tipo = models.CharField(max_length=50)
+
+    def __str__(self):
+        return "{0}".format(self.id_producto)
 
 
 class Chocolate(models.Model):
-    id_product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
-    flavor = models.CharField(max_length=50)
-    type = models.CharField(max_length=50)
+    id_producto = models.OneToOneField(Producto, on_delete=models.CASCADE, primary_key=True)
+    sabor = models.CharField(max_length=50)
+    tipo = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Flowers(models.Model):
-    id_product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
-    weight = models.SmallIntegerField(null=False)
-    price_of_bouquet = models.IntegerField(null=False)
-    amount_of_flowers = models.SmallIntegerField(null=False)
+class Flor(models.Model):
+    id_producto = models.OneToOneField(Producto, on_delete=models.CASCADE, primary_key=True)
+    peso = models.SmallIntegerField(null=False)
+    precio = models.IntegerField(null=False)
+    cantidad = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Box_of_chocolates(models.Model):
-    id_product = models.OneToOneField(
+class CajaChocolate(models.Model):
+    id_producto = models.OneToOneField(
         Chocolate,
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    category = models.CharField(max_length=30)
-    weight = models.SmallIntegerField(null=False)
-    expedition_date = models.DateTimeField(default=timezone.now)
-    expiration_date = models.DateTimeField(default=timezone.now)
-    total_price = models.IntegerField(null=False)
-    number_of_units = models.SmallIntegerField(null=False)
+    categoria = models.CharField(max_length=30)
+    peso = models.SmallIntegerField(null=False)
+    expedicion = models.DateTimeField(default=timezone.now)
+    expiracion = models.DateTimeField(default=timezone.now)
+    precio = models.IntegerField(null=False)
+    unidades = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Box_of_gummies(models.Model):
-    id_product = models.OneToOneField(
-        Gummy,
+class CajaGoma(models.Model):
+    id_producto = models.OneToOneField(
+        Goma,
         on_delete=models.CASCADE,
         primary_key=True
     )
-    category = models.CharField(max_length=30)
-    weight = models.SmallIntegerField(null=False)
-    expedition_date = models.DateTimeField(default=timezone.now)
-    expiration_date = models.DateTimeField(default=timezone.now)
-    total_price = models.IntegerField(null=False)
-    number_of_units = models.SmallIntegerField(null=False)
+    categoria = models.CharField(max_length=30)
+    peso = models.SmallIntegerField(null=False)
+    expedicion = models.DateTimeField(default=timezone.now)
+    expiracion = models.DateTimeField(default=timezone.now)
+    precio = models.IntegerField(null=False)
+    unidades = models.SmallIntegerField(null=False)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Arrag_of_gummies(models.Model):
-    id_product = models.ForeignKey(
-        Gummy,
+class ArregloGoma(models.Model):
+    id_producto = models.ForeignKey(
+        Goma,
         on_delete=models.CASCADE,
         primary_key=True
     )
-    arrag_price = models.IntegerField(null=False)
-    theme = models.CharField(max_length=50)
-    expedition_date = models.DateTimeField(default=timezone.now)
-    weight = models.SmallIntegerField(null=False)
-    package = models.CharField(max_length=50)
+    precio = models.IntegerField(null=False)
+    tema = models.CharField(max_length=50)
+    expedicion = models.DateTimeField(default=timezone.now)
+    peso = models.SmallIntegerField(null=False)
+    empaque = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
 
 
-class Arrag_of_chocls(models.Model):
-    id_product = models.ForeignKey(
+class ArregloChocolate(models.Model):
+    id_producto = models.ForeignKey(
         Chocolate,
         on_delete=models.CASCADE,
         primary_key=True
     )
-    arrag_price = models.IntegerField(null=False)
-    theme = models.CharField(max_length=50)
-    expedition_date = models.DateTimeField(default=timezone.now)
-    weight = models.SmallIntegerField(null=False)
-    package = models.CharField(max_length=50)
+    precio = models.IntegerField(null=False)
+    tema = models.CharField(max_length=50)
+    expedicion = models.DateTimeField(default=timezone.now)
+    peso = models.SmallIntegerField(null=False)
+    empaque = models.CharField(max_length=50)
 
     def __str__(self):
-        return "{0}".format(self.id_product)
+        return "{0}".format(self.id_producto)
