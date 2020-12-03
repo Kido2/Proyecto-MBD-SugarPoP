@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from blog.models import Domiciliario
 
 
 class CreateUserForm(UserCreationForm):
@@ -13,3 +14,12 @@ class CreateUserForm(UserCreationForm):
                   'email',
                   'password1',
                   'password2']
+
+
+class Domiciliario(ModelForm):
+    class Meta:
+        model = Domiciliario
+        fields = [
+            'documento',
+            'direccion'
+        ]

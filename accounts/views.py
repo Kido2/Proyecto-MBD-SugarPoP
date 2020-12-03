@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .forms import CreateUserForm, Domiciliario
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from accounts.decorators import unauthenticated_user
@@ -21,9 +21,17 @@ def registrar_cliente(request):
         if form.is_valid():
             user = form.save()
             username = form.cleaned_data.get('username')
-
-            group = Group.objects.get(name='clientes')
-            user.groups.add(group)
+            try:
+                group = Group.objects.get(name='clientes')
+            except:
+                group = None
+            print(group)
+            if group is None:
+                Group.objects.create(name='clientes')
+                group = Group.objects.get(name='clientes')
+                user.groups.add(group)
+            else:
+                user.groups.add(group)
 
             messages.success(request, 'La cuenta fue creada para ' + username)
 
@@ -42,8 +50,17 @@ def registrar_domiciliario(request):
             user = form.save()
             username = form.cleaned_data.get('username')
 
-            group = Group.objects.get(name='domiciliarios')
-            user.groups.add(group)
+            try:
+                group = Group.objects.get(name='domiciliarios')
+            except:
+                group = None
+            print(group)
+            if group is None:
+                Group.objects.create(name='domiciliarios')
+                group = Group.objects.get(name='domiciliarios')
+                user.groups.add(group)
+            else:
+                user.groups.add(group)
 
             messages.success(request, 'La cuenta fue creada para ' + username)
 
@@ -61,8 +78,20 @@ def loginPage(request):
 
         user = authenticate(request, username=username, password=password)
 
-        cliente = Group.objects.get(name="clientes").user_set.all()
-        domiciliario = Group.objects.get(name="domiciliarios").user_set.all()
+        print(user.id)
+
+        try:
+            cliente = Group.objects.get(name="clientes").user_set.all()
+        except:
+            cliente = []
+
+        try:
+            domiciliario = Group.objects.get(name="domiciliarios").user_set.all()
+        except:
+            domiciliario = []
+
+        print(user)
+        print(cliente)
         if user is not None:
             if user in cliente:
                 login(request, user)

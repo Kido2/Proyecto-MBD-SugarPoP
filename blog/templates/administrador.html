@@ -1,11 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'base_admin.html' %}
+{% load static %}
 {% block title %}
 Administrador
 {% endblock %}
 
 
 {% block content %}
-    <h3>Pagina de administrador</h3>
-    <span class="hello-msg">Hola, {{request.user}}</span>
-    <span><a href="{% url 'logout' %}">Cerrar sesión</a></span>
+    <div class="cart-row">
+        <div style="flex:1"><p>Imagen</p></div>
+        <div style="flex:1"><p>ID</p></div>
+        <div style="flex:1"><p>Nombre producto</p></div>
+        <div style="flex:1"><p>Precio</p></div>
+    </div>
+    {% for producto in productos %}
+        <div class="cart-row">
+            <div style="flex:1"><img class="row-image" src="{{ producto.imageURL }}"></div>
+            <div style="flex:1"><p>{{ producto.id_producto }}</p></div>
+            <div style="flex:1"><p>{{ producto.nombre }}</p></div>
+            <div style="flex:1"><p>{{ producto.precio }}</p></div>
+        </div>
+
+    {% endfor %}
+
+
 {% endblock %}

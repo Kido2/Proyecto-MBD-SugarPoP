@@ -36,17 +36,10 @@ class MetodoDePago(models.Model):
     debito = models.BooleanField(null=False)
 
     def __str__(self):
-        if self.efectivo:
-            return self.documento
-        elif self.credito:
-            return self.documento
-        elif self.debito:
-            return self.documento
-        else:
-            return self.documento
+        return self.documento
 
 
-class Domciliario(models.Model):
+class Domiciliario(models.Model):
     documento = models.BigIntegerField(primary_key=True)
     direccion = models.CharField(max_length=50)
     id_user = models.OneToOneField(
@@ -66,7 +59,7 @@ class Factura(models.Model):
     )
     expedicion = models.DateTimeField(default=timezone.now)
     item = models.SmallIntegerField(null=False)
-    documento_domiciliario = models.ForeignKey(Domciliario, on_delete=models.CASCADE)
+    documento_domiciliario = models.ForeignKey(Domiciliario, on_delete=models.CASCADE)
 
     def __str__(self):
         return "{0}".format(self.id_factura)
@@ -76,6 +69,7 @@ class Producto(models.Model):
     id_producto = models.SmallIntegerField(primary_key=True)
     nombre = models.CharField(null=False, max_length=50)
     precio = models.IntegerField(null=False)
+    imagen = models.ImageField(null=True, blank=True)
     documento_admin = models.ForeignKey(
         Admin,
         on_delete=models.CASCADE
@@ -83,6 +77,14 @@ class Producto(models.Model):
 
     def __str__(self):
         return "{0}".format(self.id_producto)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.imagen.url
+        except:
+            url = ''
+        return url
 
 
 class CarritoCompra(models.Model):
@@ -140,7 +142,6 @@ class Chocolate(models.Model):
 class Flor(models.Model):
     id_producto = models.OneToOneField(Producto, on_delete=models.CASCADE, primary_key=True)
     peso = models.SmallIntegerField(null=False)
-    precio = models.IntegerField(null=False)
     cantidad = models.SmallIntegerField(null=False)
 
     def __str__(self):
@@ -157,7 +158,6 @@ class CajaChocolate(models.Model):
     peso = models.SmallIntegerField(null=False)
     expedicion = models.DateTimeField(default=timezone.now)
     expiracion = models.DateTimeField(default=timezone.now)
-    precio = models.IntegerField(null=False)
     unidades = models.SmallIntegerField(null=False)
 
     def __str__(self):
@@ -174,7 +174,6 @@ class CajaGoma(models.Model):
     peso = models.SmallIntegerField(null=False)
     expedicion = models.DateTimeField(default=timezone.now)
     expiracion = models.DateTimeField(default=timezone.now)
-    precio = models.IntegerField(null=False)
     unidades = models.SmallIntegerField(null=False)
 
     def __str__(self):
@@ -187,7 +186,6 @@ class ArregloGoma(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
     )
-    precio = models.IntegerField(null=False)
     tema = models.CharField(max_length=50)
     expedicion = models.DateTimeField(default=timezone.now)
     peso = models.SmallIntegerField(null=False)
@@ -203,7 +201,6 @@ class ArregloChocolate(models.Model):
         on_delete=models.CASCADE,
         primary_key=True
     )
-    precio = models.IntegerField(null=False)
     tema = models.CharField(max_length=50)
     expedicion = models.DateTimeField(default=timezone.now)
     peso = models.SmallIntegerField(null=False)

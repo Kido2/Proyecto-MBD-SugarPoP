@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div id="cliente-info">
+            <hr>
+            <p>Inofrmación de su perfil</p>
+            <hr>
+            <div class="form-field">
+                <div align="center">{{ form.documento.label }}</div>
+                <br>
+                {{ form.documento }}
+            </div>
+            <hr>
+            <div class="form-field">
+                <div align="center">{{ form.direccion.label }}</div>
+                <br>
+                {{ form.direccion }}
+            </div>
+            <hr>
+            <div class="form-field">
+                {{ form.ciudad }}
+            </div>
+            <hr>
+            <div class="form-field">
+                {{ form.pais }}
+            </div>
+            <hr>
+            <div class="form-field">
+                {{ form.telefono }}
+            </div>
+            <input required class="form-control hidden" type="number" name="id_user" value="{{ request.user.id }}">
+        </div>
+        <div class="d-flex justify-content-center mt-3 login_container">
+            <input class="btn login_btn btn-warning" type="submit" value="Guardar datos">
+        </div>
+        {{form.errors}}
+    </form>
+{% endblock %}
