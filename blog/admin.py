@@ -9,7 +9,6 @@ admin.site.register([Admin, Producto, Domiciliario, Cliente, MetodoDePago, Factu
                      ArregloChocolate])
 
 ################################################################################################################################
-admin.site.register(Customer)
 admin.site.register(Order)
 admin.site.register(OrderItem)
 ################################################################################################################################

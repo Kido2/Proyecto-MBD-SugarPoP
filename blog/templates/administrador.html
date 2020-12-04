@@ -11,6 +11,8 @@ Administrador
         <div style="flex:1"><p>ID</p></div>
         <div style="flex:1"><p>Nombre producto</p></div>
         <div style="flex:1"><p>Precio</p></div>
+        <div style="flex:1"><p>Actualizar</p></div>
+        <div style="flex:1"><p>Eliminar</p></div>
     </div>
     {% for producto in productos %}
         <div class="cart-row">
@@ -18,6 +20,8 @@ Administrador
             <div style="flex:1"><p>{{ producto.id_producto }}</p></div>
             <div style="flex:1"><p>{{ producto.nombre }}</p></div>
             <div style="flex:1"><p>{{ producto.precio }}</p></div>
+            <div style="flex:1"><a class="btn btn-sm btn-info" href="{% url 'actualizar' producto.id_producto %}">Actualizar</a></div>
+            <div style="flex:1"><a class="btn btn-sm btn-danger" href="{% url 'eliminar' producto.id_producto %}">Eliminar</a></div>
         </div>
 
     {% endfor %}

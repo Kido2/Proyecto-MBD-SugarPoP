@@ -1,0 +1,21 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block content %}
+        <table class="table table-sm">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Documento</th>
+                <th>Dirección</th>
+            </tr>
+        {% for foo in domiciliario %}
+            <tr>
+                <td>{{ foo.id_user.first_name }}</td>
+                <td>{{ foo.id_user.last_name }}</td>
+                <td>{{ foo.documento }}</td>
+                <td>{{ foo.direccion }}</td>
+            </tr>
+    {% endfor %}
+        </table>
+{% endblock %}

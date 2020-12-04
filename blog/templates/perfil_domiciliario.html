@@ -20,23 +20,6 @@
                 {{ form.direccion }}
             </div>
             <hr>
-            <div class="form-field">
-                <div align="center">{{ form.ciudad.label }}</div>
-                <br>
-                {{ form.ciudad }}
-            </div>
-            <hr>
-            <div class="form-field">
-                <div align="center">{{ form.pais.label }}</div>
-                <br>
-                {{ form.pais }}
-            </div>
-            <hr>
-            <div class="form-field">
-                <div align="center">{{ form.telefono.label }}</div>
-                <br>
-                {{ form.telefono }}
-            </div>
             <input required class="form-control hidden" type="number" name="id_user" value="{{ request.user.id }}">
         </div>
         <div class="d-flex justify-content-center mt-3 login_container">
