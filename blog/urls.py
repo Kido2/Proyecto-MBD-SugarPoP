@@ -16,4 +16,6 @@ urlpatterns = [
     path("caja_chocolate/", views.crear_caja_chocolate, name="caja_chocolate"),
     path("caja_goma/", views.crear_caja_goma, name="caja_goma"),
     path("flores/", views.crear_flores, name="flores"),
+
+    path('update_item/', views.updateItem, name="update_item"),
 ]

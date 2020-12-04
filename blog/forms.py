@@ -68,7 +68,6 @@ class CrearCajaChocolates(ModelForm):
             'peso',
             'expedicion',
             'expiracion',
-            'precio',
             'unidades'
         ]
 
@@ -82,7 +81,6 @@ class CrearCajaGomas(ModelForm):
             'peso',
             'expedicion',
             'expiracion',
-            'precio',
             'unidades'
         ]
 
@@ -118,4 +116,13 @@ class CrearFlores(ModelForm):
             'id_producto',
             'peso',
             'cantidad'
+        ]
+
+class CrearDomiciliario(ModelForm):
+    class Meta:
+        model = Domiciliario
+        fields = [
+            'documento',
+            'direccion',
+            'id_user'
         ]

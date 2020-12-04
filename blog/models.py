@@ -29,6 +29,71 @@ class Cliente(models.Model):
         return "{0}".format(self.documento)
 
 
+############################################################
+class Customer(models.Model):
+	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+	name = models.CharField(max_length=200, null=True)
+	email = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.name
+
+class Producto(models.Model):
+    id_producto = models.SmallIntegerField(primary_key=True)
+    nombre = models.CharField(null=False, max_length=50)
+    precio = models.IntegerField(null=False)
+    imagen = models.ImageField(null=True, blank=True)
+    documento_admin = models.ForeignKey(
+        Admin,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return "{0}".format(self.id_producto)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.imagen.url
+        except:
+            url = ''
+        return url
+
+class Order(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.SET_NULL, null=True, blank=True)
+    date_ordered = models.DateTimeField(auto_now_add=True)
+    complete = models.BooleanField(default=False)
+    transaction_id = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return str(self.id)
+        
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+        
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Producto, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField(default=0, null=True, blank=True)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_total(self):
+        total = self.product.precio * self.quantity
+        return total
+
+#############################################################
+
+
 class MetodoDePago(models.Model):
     documento = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     efectivo = models.BooleanField(null=False)
@@ -63,28 +128,6 @@ class Factura(models.Model):
 
     def __str__(self):
         return "{0}".format(self.id_factura)
-
-
-class Producto(models.Model):
-    id_producto = models.SmallIntegerField(primary_key=True)
-    nombre = models.CharField(null=False, max_length=50)
-    precio = models.IntegerField(null=False)
-    imagen = models.ImageField(null=True, blank=True)
-    documento_admin = models.ForeignKey(
-        Admin,
-        on_delete=models.CASCADE
-    )
-
-    def __str__(self):
-        return "{0}".format(self.id_producto)
-
-    @property
-    def imageURL(self):
-        try:
-            url = self.imagen.url
-        except:
-            url = ''
-        return url
 
 
 class CarritoCompra(models.Model):

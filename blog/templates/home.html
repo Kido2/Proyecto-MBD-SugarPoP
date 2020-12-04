@@ -14,7 +14,7 @@
 				<h6><strong>{{producto.nombre}}</strong></h6>
 				<hr>
 
-				<button  class="btn btn-outline-secondary add-btn">Añadir a carrito</button>
+				<button data-product="{{producto.id_producto}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
 				<a class="btn btn-outline-success" href="#">Ver</a>
 				<h4 style="display: inline-block; float: right"><strong>${{producto.precio}}</strong></h4>
 			</div>
